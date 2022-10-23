@@ -28,9 +28,17 @@ workspace_layout tabbed
 #             actions             #
 ###################################
 
-#screenshots
-bindsym --release $mod+Ctrl+p exec scrot -c -d 3 screenshot-$(date +%Y-%m-%d_%T_%Z%:z_%s).png -e 'mv $f ~/Pictures/Pictures/screenshots'
-bindsym --release $mod+Shift+p exec scrot -s screenshot-$(date +%Y-%m-%d_%T_%Z%:z_%s).png -e 'mv $f ~/Pictures/Pictures/screenshots'
+# https://dev.to/dianjuar/i3wm-screenshot-shortcuts-3n7b
+# https://github.com/naelstrof/maim
+# Screenshots
+bindsym Print exec --no-startup-id maim --window $(xdotool getactivewindow) -u "$HOME/Pictures/screenshots/screenshot-$(date +%Y-%m-%d_%T_%Z%:z_%s).png"
+bindsym $mod+Print exec --no-startup-id maim --select -u "$HOME/Pictures/screenshots/screenshot-$(date +%Y-%m-%d_%T_%Z%:z_%s).png"
+bindsym $mod+Shift+Print exec --no-startup-id maim -u "$HOME/Pictures/screenshots/screenshot-$(date +%Y-%m-%d_%T_%Z%:z_%s).png"
+
+## Clipboard Screenshots
+bindsym Ctrl+Print exec --no-startup-id maim --window $(xdotool getactivewindow) -u | xclip -selection clipboard -t image/png
+bindsym Ctrl+Shift+Print exec --no-startup-id maim --select -u | xclip -selection clipboard -t image/png
+bindsym Ctrl+Shift+$mod+Print exec --no-startup-id maim -u | xclip -selection clipboard -t image/png
 
 #bindsym $mod+m [class="(?i)mpv"] floating enable   move container to output HDMI-1, move to position 0 px 0 px
 
@@ -67,7 +75,7 @@ assign [class="processing-core-PApplet"] workspace $ws3
 #               bar                #
 ####################################
 
-exec_always --no-startup-id $HOME/dotfiles/wms/commons/panel/polybar/polybar-launch
+exec_always --no-startup-id $HOME/.config/polybar/polybar_launcher
 
 #bindsym $mod+m bar mode toggle
 bindsym --release $mod+p exec polybar-msg cmd toggle
@@ -88,29 +96,41 @@ bindsym Mod1+F4 kill
 bindsym $mod+Shift+Control+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+Control+r restart
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+Control+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Control+e exec "i3-nagbar -t warning -m 'Do you really want to lock i3?' -b 'Yes, lock i3' '~/dotfiles/bin/i3lock-fancy'"
+
+# lock session
+bindsym $mod+Shift+Control+l exec ~/.local/bin/i3lock-fancy
 
 # https://faq.i3wm.org/question/3747/enabling-multimedia-keys.1.html
 # https://www.reddit.com/r/i3wm/comments/45yz3n/keyboard_media_keys_volume_control/
-#bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 1 +2% 
-#bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 -2%
-#bindsym XF86AudioMute exec pactl set-sink-mute 1 toggle
+#bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +2% 
+#bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -2%
+#bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 #bindsym XF86AudioPlay exec playerctl play-pause
 #bindsym XF86AudioNext exec playerctl next
 #bindsym XF86AudioPrev exec playerctl previous
 
-bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/dotfiles/wms/commons/scripts/notify_volume + 5
-bindsym XF86AudioLowerVolume exec --no-startup-id $HOME/dotfiles/wms/commons/scripts/notify_volume - 5
-bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id $HOME/dotfiles/wms/commons/scripts/notify_volume + 10
-bindsym Shift+XF86AudioLowerVolume exec --no-startup-id $HOME/dotfiles/wms/commons/scripts/notify_volume - 10
-bindsym XF86AudioMute exec --no-startup-id $HOME/dotfiles/wms/commons/scripts/notify_volume !
+#bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/dotfiles/wms/commons/scripts/notify_volume + 5
+#bindsym XF86AudioLowerVolume exec --no-startup-id $HOME/dotfiles/wms/commons/scripts/notify_volume - 5
+#bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id $HOME/dotfiles/wms/commons/scripts/notify_volume + 10
+#bindsym Shift+XF86AudioLowerVolume exec --no-startup-id $HOME/dotfiles/wms/commons/scripts/notify_volume - 10
+#bindsym XF86AudioMute exec --no-startup-id $HOME/dotfiles/wms/commons/scripts/notify_volume !
 
-bindsym XF86MonBrightnessUp exec --no-startup-id $HOME/dotfiles/wms/i3/scripts/brightness +5
-bindsym XF86MonBrightnessDown exec --no-startup-id $HOME/dotfiles/wms/i3/scripts/brightness -5
+#amixer -q sset Master 3%+
+#amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print $2 }'
+bindsym XF86AudioRaiseVolume exec "amixer set Master 2%+ unmute"
+bindsym XF86AudioLowerVolume exec "amixer set Master 2%- unmute"
+bindsym XF86AudioMute exec "amixer set Master toggle"
 
-bindsym $mod+Shift+Control+l exec ~/dotfiles/bin/i3lock-fancy
-bindsym $mod+Control+e exec "i3-nagbar -t warning -m 'Do you really want to lock i3?' -b 'Yes, lock i3' '~/dotfiles/bin/i3lock-fancy'"
+#bindsym XF86MonBrightnessUp exec --no-startup-id $HOME/dotfiles/wms/i3/scripts/brightness +5
+#bindsym XF86MonBrightnessDown exec --no-startup-id $HOME/dotfiles/wms/i3/scripts/brightness -5
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 # increase screen brightness
+bindsym Shift+XF86MonBrightnessUp exec --no-startup-id light -A 30 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen brightness
+bindsym Shift+XF86MonBrightnessDown exec --no-startup-id light -U 30 # decrease screen brightness
 
 #morc_menu
 bindsym $mod+z exec $HOME/dotfiles/wms/commons/morc_menu/morc_menu/morc_menu
@@ -140,7 +160,7 @@ bindsym $mod+Shift+Return exec kitty
 ###################################
 
 exec --no-startup-id gnome-settings-daemon
-exec gnome-keyring-daemon
+#exec gnome-keyring-daemon
 
 # compositor
 exec_always --no-startup-id picom -bc
@@ -157,7 +177,7 @@ exec --no-startup-id deadbeef
 #exec --no-startup-id ~/dotfiles/bin/i3wm-xfsettings_launch
 #exec --no-startup-id ~/.dropbox-dist/dropboxd
 
-#exec_always --no-startup-id nm-applet
+exec_always --no-startup-id nm-applet
 #exec_always --no-startup-id compton -f
 #exec_always --no-startup-id compton -f --backend glx --unredir-if-possible --vsync opengl-swc
 
@@ -278,23 +298,24 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-set $mode_system System (0) reload i3, (l) lock , (e) logout , (s) suspend  , (h) hibernate  , (r) reboot   , (Shift+s) shutdown 
+set $mode_system (0) reload i3, (l) lock , (e) logout , (s) suspend  , (h) hibernate  , (r) reboot   , (Shift+s) shutdown 
 mode "$mode_system" {
-  bindsym 0 exec --no-startup-id i3 reload, mode "default"
-  bindsym l exec --no-startup-id ~/dotfiles/bin/i3exit lock, mode "default"
-  bindsym e exec --no-startup-id ~/dotfiles/bin/i3exit logout, mode "default"
-  bindsym s exec --no-startup-id ~/dotfiles/bin/i3exit suspend, mode "default"
-  bindsym h exec --no-startup-id ~/dotfiles/bin/i3exit hibernate, mode "default"
-  bindsym r exec --no-startup-id ~/dotfiles/bin/i3exit reboot, mode "default"
-  bindsym Shift+s exec --no-startup-id ~/dotfiles/bin/i3exit shutdown, mode "default"
+  #bindsym 0 exec --no-startup-id i3 reload, mode "default"
+  bindsym 0 exec --no-startup-id i3 reload
+  bindsym l exec --no-startup-id ~/.local/bin/i3exit lock, mode "default"
+  bindsym e exec --no-startup-id ~/.local/bin/i3exit logout, mode "default"
+  bindsym s exec --no-startup-id ~/.local/bin/i3exit suspend, mode "default"
+  bindsym h exec --no-startup-id ~/.local/bin/i3exit hibernate, mode "default"
+  bindsym r exec --no-startup-id ~/.local/bin/i3exit reboot, mode "default"
+  bindsym Shift+s exec --no-startup-id ~/.local/bin/i3exit shutdown, mode "default"
   
   # back to normal: Enter or Escape
   bindsym Return mode "default"
   bindsym Escape mode "default"
 }
 bindsym --release XF86PowerOff mode "$mode_system"
-
 #bindsym $mod+Shift+Control+F12 exec i3-msg exit
+bindsym $mod+Shift+Control+F12 mode "$mode_system"
 
 # https://www.reddit.com/r/i3wm/comments/77mqxa/bindsym_power_button/
 exec --no-startup-id systemd-inhibit --what=handle-power-key sleep infinity
