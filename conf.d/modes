@@ -1,0 +1,62 @@
+# vim: filetype=sh
+
+# https://wiki.archlinux.org/index.php/I3
+set $mode_display Ext Screen (v) VGA ON, (h) HDMI ON, (x) VGA OFF, (y) HDMI OFF
+mode "$mode_display" {
+    bindsym v exec --no-startup-id xrandr --output VGA1 --auto --right-of LVDS1, mode "default"
+    bindsym h exec --no-startup-id xrandr --output HDMI1 --auto --right-of LVDS1, mode "default"
+    bindsym x exec --no-startup-id xrandr --output VGA1 --auto --off, mode "default"
+    bindsym y exec --no-startup-id xrandr --output HDMI1 --auto --off, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+x mode "$mode_display"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+  # These bindings trigger as soon as you enter the resize mode
+
+  # Pressing left will shrink the window’s width.
+  # Pressing right will grow the window’s width.
+  # Pressing up will shrink the window’s height.
+  # Pressing down will grow the window’s height.
+  bindsym j resize shrink width 10 px or 10 ppt
+  bindsym k resize grow height 10 px or 10 ppt
+  bindsym l resize shrink height 10 px or 10 ppt
+  bindsym semicolon resize grow width 10 px or 10 ppt
+
+  # same bindings, but for the arrow keys
+  bindsym Left resize shrink width 10 px or 10 ppt
+  bindsym Down resize grow height 10 px or 10 ppt
+  bindsym Up resize shrink height 10 px or 10 ppt
+  bindsym Right resize grow width 10 px or 10 ppt
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+set $mode_system (0) reload i3, (l) lock , (e) logout , (s) suspend  , (h) hibernate  , (r) reboot   , (Shift+s) shutdown 
+mode "$mode_system" {
+  #bindsym 0 exec --no-startup-id i3 reload, mode "default"
+  bindsym 0 exec --no-startup-id i3 reload
+  bindsym l exec --no-startup-id ~/.local/bin/i3exit lock, mode "default"
+  bindsym e exec --no-startup-id ~/.local/bin/i3exit logout, mode "default"
+  bindsym s exec --no-startup-id ~/.local/bin/i3exit suspend, mode "default"
+  bindsym h exec --no-startup-id ~/.local/bin/i3exit hibernate, mode "default"
+  bindsym r exec --no-startup-id ~/.local/bin/i3exit reboot, mode "default"
+  bindsym Shift+s exec --no-startup-id ~/.local/bin/i3exit shutdown, mode "default"
+  
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym --release XF86PowerOff mode "$mode_system"
+#bindsym $mod+Shift+Control+F12 exec i3-msg exit
+bindsym $mod+Shift+Control+F12 mode "$mode_system"
+
+# https://www.reddit.com/r/i3wm/comments/77mqxa/bindsym_power_button/
+exec --no-startup-id systemd-inhibit --what=handle-power-key sleep infinity

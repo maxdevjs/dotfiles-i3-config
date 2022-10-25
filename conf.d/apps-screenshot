@@ -1,0 +1,15 @@
+# vim: filetype=sh
+
+exec --no-startup-id flameshot
+
+# https://dev.to/dianjuar/i3wm-screenshot-shortcuts-3n7b
+# https://github.com/naelstrof/maim
+# Screenshots
+bindsym Print exec --no-startup-id maim --window $(xdotool getactivewindow) -u "$HOME/Pictures/screenshots/screenshot-$(date +%Y-%m-%d_%T_%Z%:z_%s).png"
+bindsym $mod+Print exec --no-startup-id maim --select -u "$HOME/Pictures/screenshots/screenshot-$(date +%Y-%m-%d_%T_%Z%:z_%s).png"
+bindsym $mod+Shift+Print exec --no-startup-id maim -u "$HOME/Pictures/screenshots/screenshot-$(date +%Y-%m-%d_%T_%Z%:z_%s).png"
+
+## Clipboard Screenshots
+bindsym Ctrl+Print exec --no-startup-id maim --window $(xdotool getactivewindow) -u | xclip -selection clipboard -t image/png
+bindsym Ctrl+Shift+Print exec --no-startup-id maim --select -u | xclip -selection clipboard -t image/png
+bindsym Ctrl+Shift+$mod+Print exec --no-startup-id maim -u | xclip -selection clipboard -t image/png

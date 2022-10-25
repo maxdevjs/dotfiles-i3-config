@@ -1,0 +1,31 @@
+# vim: filetype=sh
+
+#set_from_resource        $primary primary #ffb52a
+
+set_from_resource        $foreground foreground #ffb52a
+set_from_resource        $background background #0a0a1a
+set_from_resource        $alert alert #e60053
+
+# windows title bar colors
+                          # border      background    text
+client.focused            $background   $foreground   $background
+client.focused_inactive	  $foreground   $background   $foreground
+client.unfocused          $background   $background   $foreground
+client.urgent             $background   $alert        $background
+
+font xft:FontAwesome 10.3
+
+#set_from_resource        $foreground foreground #8Cf595
+#set_from_resource        $background background #2b2b2b
+#set_from_resource        $foreground-unfocused foreground-unfocused #6C9565
+#
+#set_from_resource        $primary primary #ffb52a
+#set_from_resource        $alert alert #ffb52a
+## windows title bar colors
+#                          # border    background  text
+#client.focused            $primary    $background $foreground
+#client.unfocused          $background $background $foreground
+#client.focused_inactive	  $primary    $primary    #000000
+#client.urgent             $background $alert      $foreground
+#
+#font xft:FontAwesome 10.3

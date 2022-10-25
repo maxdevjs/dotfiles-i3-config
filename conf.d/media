@@ -1,0 +1,14 @@
+# vim: filetype=sh
+
+#amixer -q sset Master 3%+
+#amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print $2 }'
+bindsym XF86AudioRaiseVolume exec "amixer set Master 2%+ unmute"
+bindsym XF86AudioLowerVolume exec "amixer set Master 2%- unmute"
+bindsym XF86AudioMute exec "amixer set Master toggle"
+
+#bindsym XF86MonBrightnessUp exec --no-startup-id $HOME/dotfiles/wms/i3/scripts/brightness +5
+#bindsym XF86MonBrightnessDown exec --no-startup-id $HOME/dotfiles/wms/i3/scripts/brightness -5
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 # increase screen brightness
+bindsym Shift+XF86MonBrightnessUp exec --no-startup-id light -A 30 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen brightness
+bindsym Shift+XF86MonBrightnessDown exec --no-startup-id light -U 30 # decrease screen brightness

@@ -1,0 +1,12 @@
+# vim: filetype=sh
+
+assign [title="Google Chrome"] $ws1
+assign [title="Firefox"] $ws2
+assign [class="Deadbeef"] $ws5
+#for_window [title="System Monitor"] move to workspace $ws10
+for_window [title="System Settings"] move to workspace $ws10
+assign [title="Filelight"] $ws10
+
+# Processing
+for_window [class="^Processing$"] move to workspace $ws3
+assign [class="processing-core-PApplet"] workspace $ws3

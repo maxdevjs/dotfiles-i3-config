@@ -1,0 +1,10 @@
+# vim: filetype=sh
+
+bindsym $mod+slash move scratchpad
+bindsym $mod+backslash scratchpad show
+
+exec --no-startup-id kitty --detach --session $HOME/.config/kitty/sessions/kitty-monitor-sessions
+#exec --no-startup-id kitty --detach --session $HOME/dotfiles/apps/kitty/session-sys-mon
+#exec --no-startup-id kitty --detach --session $HOME/dotfiles/apps/kitty/session-dotfiles
+for_window [title="scratch_pad_iotop"] move scratchpad
+bindsym $mod+Shift+d [title="scratch-dotfiles"] scratchpad show

@@ -1,0 +1,72 @@
+# vim: filetype=sh
+
+# Super/Win
+set $mod Mod4
+# Alt
+#set $mod Mod1
+
+# kill focused window
+bindsym $mod+Shift+q kill
+bindsym Mod1+F4 kill
+
+bindsym $mod+Shift+Control+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+Control+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+Control+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Control+e exec "i3-nagbar -t warning -m 'Do you really want to lock i3?' -b 'Yes, lock i3' '~/dotfiles/bin/i3lock-fancy'"
+
+# lock session
+bindsym $mod+Shift+Control+l exec ~/.local/bin/i3lock-fancy
+
+# https://faq.i3wm.org/question/3747/enabling-multimedia-keys.1.html
+# https://www.reddit.com/r/i3wm/comments/45yz3n/keyboard_media_keys_volume_control/
+#bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +2% 
+#bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -2%
+#bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+#bindsym XF86AudioPlay exec playerctl play-pause
+#bindsym XF86AudioNext exec playerctl next
+#bindsym XF86AudioPrev exec playerctl previous
+
+#bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/dotfiles/wms/commons/scripts/notify_volume + 5
+#bindsym XF86AudioLowerVolume exec --no-startup-id $HOME/dotfiles/wms/commons/scripts/notify_volume - 5
+#bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id $HOME/dotfiles/wms/commons/scripts/notify_volume + 10
+#bindsym Shift+XF86AudioLowerVolume exec --no-startup-id $HOME/dotfiles/wms/commons/scripts/notify_volume - 10
+#bindsym XF86AudioMute exec --no-startup-id $HOME/dotfiles/wms/commons/scripts/notify_volume !
+
+#amixer -q sset Master 3%+
+#amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print $2 }'
+bindsym XF86AudioRaiseVolume exec "amixer set Master 2%+ unmute"
+bindsym XF86AudioLowerVolume exec "amixer set Master 2%- unmute"
+bindsym XF86AudioMute exec "amixer set Master toggle"
+
+#bindsym XF86MonBrightnessUp exec --no-startup-id $HOME/dotfiles/wms/i3/scripts/brightness +5
+#bindsym XF86MonBrightnessDown exec --no-startup-id $HOME/dotfiles/wms/i3/scripts/brightness -5
+bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5 # increase screen brightness
+bindsym Shift+XF86MonBrightnessUp exec --no-startup-id light -A 30 # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5 # decrease screen brightness
+bindsym Shift+XF86MonBrightnessDown exec --no-startup-id light -U 30 # decrease screen brightness
+
+#morc_menu
+bindsym $mod+z exec $HOME/dotfiles/wms/commons/morc_menu/morc_menu/morc_menu
+
+bindsym $mod+Control+n exec $HOME/dotfiles/wms/commons/networkmanager-dmenu/networkmanager_dmenu
+
+# focus mode
+# vertical horizontal
+#bindsym $mod+q split vertical; mark lastsplit; exec /home/max/dotfiles/bin/i3wm-focus.sh/i3wm-focus
+bindsym $mod+q exec /home/max/dotfiles/bin/i3wm-focus.sh/i3wm-focus
+#bindsym $mod+q exec /home/max/dotfiles/bin/i3wm-focus.sh/i3wm-focus
+#bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+
+# https://community.spotify.com/t5/Desktop-Linux/Basic-controls-via-command-line/td-p/4295625
+# https://wiki.debian.org/Keyboard/MultimediaKeys
+bindsym --release XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+bindsym --release XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+bindsym --release XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+
+bindsym $mod+Control+Return exec ~/dotfiles/bin/i3-sensible-terminal
+#bindsym $mod+Shift+Return exec gnome-terminal
+bindsym $mod+Return exec kitty
+bindsym $mod+Shift+Return exec kitty

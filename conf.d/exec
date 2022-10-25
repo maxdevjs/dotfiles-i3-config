@@ -1,0 +1,22 @@
+# vim: filetype=sh
+
+exec --no-startup-id gnome-settings-daemon
+#exec gnome-keyring-daemon
+
+# compositor
+exec_always --no-startup-id picom -bc
+
+exec --no-startup-id deadbeef
+#exec --no-startup-id solus-update-checker
+
+#exec_always --no-startup-id setxkbmap -option caps:escape
+
+exec_always --no-startup-id nm-applet
+
+#exec --no-startup-id start-pulseaudio-x11
+# Brasilia -l 15.8267:-47.9218
+#exec --no-startup-id redshift-gtk -l 15.8267:-47.9218
+#exec --no-startup-id /usr/bin/smbdb
+
+# wallpaper
+exec nitrogen --restore

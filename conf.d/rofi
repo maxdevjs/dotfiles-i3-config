@@ -1,0 +1,12 @@
+# vim: filetype=sh
+
+bindsym $mod+space exec rofi -show run -p "λ run: " -fullscreen -scrollbar-width 70 -sidebar-mode -eh 1  -bc "#6C9565"
+
+bindsym $mod+w exec rofi -show window -p "λ window: " -fullscreen -scrollbar-width 70 -sidebar-mode -eh 1 -columns 1 -bc "#6C9565"
+bindsym $mod+Control+w exec rofi -show window -p "λ window: " -fullscreen -scrollbar-width 70 -sidebar-mode -eh 1 -columns 1 -bc "#6C9565"
+
+bindsym $mod+Control+a exec rofi -show drun -p "λ run: " -fullscreen -scrollbar-width 70 -sidebar-mode -eh 1  -bc "#6C9565"
+
+#bindsym $mod+d exec rofi -theme sidebar -show drun & sleep 0.3 && xprop -f -name rofi
+
+bindsym $mod+Control+s exec rofi -show ssh -p "λ ssh: " -fullscreen -scrollbar-width 70 -sidebar-mode -eh 1 -columns 1 -bc "#6C9565"
