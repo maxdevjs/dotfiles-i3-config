@@ -1,5 +1,7 @@
 # vim: filetype=sh
 
+#include conf.d/header
+
 #                                  ██ ██████
 #                                  ██      ██
 #                                  ██  █████
@@ -19,3 +21,7 @@
 # Author: maxdevjs
 # Version:1.1
 # Repo: https://github.com/maxdevjs/dotfiles
+
+# https://i3wm.org/docs/userguide.html#_layout_mode_for_new_containers
+# workspace_layout default|stacking|tabbed
+workspace_layout tabbed

@@ -1,0 +1,10 @@
+# vim: filetype=sh
+
+###################################
+#             actions             #
+###################################
+
+#bindsym $mod+m [class="(?i)mpv"] floating enable move container to output HDMI-1, move to position 0 px 0 px
+
+#bindsym $mod+m [class="(?i)mpv"] floating enable move container to output HDMI-1, move to position 1370 px 4 px
+
