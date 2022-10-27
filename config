@@ -44,12 +44,6 @@ workspace_layout tabbed
 include conf.d/apps
 #include conf.d/apps-screenshot
 
-###################################
-#             assign              #
-###################################
-
-include conf.d/assign
-
 ####################################
 #               bar                #
 ####################################
@@ -173,7 +167,79 @@ include conf.d/window-management
 #            workspaces              #
 ######################################
 
-include conf.d/workspaces
+#include conf.d/workspaces
+
+###################################
+#             assign              #
+###################################
+
+#include conf.d/assign
+
+# vim: filetype=sh
+
+# navigation
+# prev next workspace
+bindsym $mod+comma workspace prev
+bindsym $mod+period workspace next
+
+# tab between recent workspaces
+bindsym $mod+Tab workspace back_and_forth
+# next/previous workspace
+bindsym Mod1+Tab workspace next
+bindsym Mod1+Shift+Tab workspace prev
+#bindsym Ctrl+Mod1+Left workspace prev
+#bindsym Ctrl+Mod1+Right workspace next
+# move focused workspace between monitors
+# (i3-msg) move workspace to output left|right|down|up|current|primary|<output>
+bindsym $mod+Ctrl+greater move workspace to output right
+bindsym $mod+Ctrl+less move workspace to output left
+
+# setting workspaces variables
+set $ws1 "1:"
+set $ws2 "2:"
+set $ws3 "3:"
+set $ws4 "4:"
+set $ws5 "5:"
+set $ws6  "6:"
+set $ws7  "7:"
+set $ws8  "8:  "
+set $ws9  "9:  "
+set $ws10 "10:"
+
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+assign [title="Google Chrome"] $ws1
+assign [title="Firefox"] $ws2
+assign [class="Deadbeef"] $ws5
+#for_window [title="System Monitor"] move to workspace $ws10
+for_window [title="System Settings"] move to workspace $ws10
+assign [title="Filelight"] $ws10
+
+# Processing
+for_window [class="^Processing$"] move to workspace $ws3
+assign [class="processing-core-PApplet"] workspace $ws3
+
 
 ######################################
 #            kde/plasma              #
