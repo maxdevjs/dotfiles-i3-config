@@ -1,5 +1,9 @@
 # vim: filetype=sh
 
+###################################
+#              exec               #
+###################################
+
 exec --no-startup-id gnome-settings-daemon
 #exec gnome-keyring-daemon
 

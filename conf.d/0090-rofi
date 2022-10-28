@@ -1,5 +1,9 @@
 # vim: filetype=sh
 
+###################################
+#               rofi              #
+###################################
+
 bindsym $mod+space exec rofi -show run -p "λ run: " -fullscreen -scrollbar-width 70 -sidebar-mode -eh 1  -bc "#6C9565"
 
 bindsym $mod+w exec rofi -show window -p "λ window: " -fullscreen -scrollbar-width 70 -sidebar-mode -eh 1 -columns 1 -bc "#6C9565"

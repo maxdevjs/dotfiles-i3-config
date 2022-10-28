@@ -1,5 +1,17 @@
 # vim: filetype=sh
 
+###################################
+#               apps              #
+###################################
+
+bindsym $mod+Shift+c exec gnome-calculator
+for_window [title="Calculator"] floating enable
+
+bindsym $mod+Shift+f exec nautilus --no-desktop
+
+bindsym $mod+shift+m exec gnome-system-monitor
+for_window [title="System Monitor"] move to workspace $ws10
+
 exec --no-startup-id flameshot
 
 # https://dev.to/dianjuar/i3wm-screenshot-shortcuts-3n7b

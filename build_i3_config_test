@@ -1,3 +1,10 @@
 #!/usr/bin/env sh
+d
+if [ -f config ]
+then
+  mv ~/.config/i3/config ~/.config/i3/config_"$(date)"
+fi
 
-cat ~/.config/i3/conf.d/* > ~/.config/i3/config_test
+cat ~/.config/i3/conf.d/0* > ~/.config/i3/config
+
+# Add KDE/Plasma etc cases

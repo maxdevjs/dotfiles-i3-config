@@ -1,5 +1,9 @@
 # vim: filetype=sh
 
+###################################
+#           scratchpad            #
+###################################
+
 bindsym $mod+slash move scratchpad
 bindsym $mod+backslash scratchpad show
 

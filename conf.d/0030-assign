@@ -1,5 +1,9 @@
 # vim: filetype=sh
 
+###################################
+#             assign              #
+###################################
+
 assign [title="Google Chrome"] $ws1
 assign [title="Firefox"] $ws2
 assign [class="Deadbeef"] $ws5

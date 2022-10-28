@@ -1,3 +1,8 @@
+# vim: filetype=sh
+
+######################################
+#            kde/plasma              #
+######################################
 
 #assign [title="Desktop — Plasma"] $ws9
 #for_window [title="Desktop — Plasma"] move to workspace $ws9

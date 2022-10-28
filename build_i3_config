@@ -1,24 +1,24 @@
+#!/usr/bin/env sh
 
+0000-header
+0010-actions
+0020-apps
+0021-apps-screenshot
+0030-assign
+0040-bar
+0041-polybar
+0050-bindings
+0051-bindings-media
+0060-exec
+0070-gaps
+0080-modes
+0090-rofi
+0100-scratchpad
+0110-ui
+0120-window-management
+0130-workspaces
 
+cat ~/.config/i3/conf.d/0* > ~/.config/i3/config_test
 
-000-header
-001-actions
-002-apps
-003-apps-screenshot
-004-assign
-005-bar
-0051-polybar
-006-bindings
-007-exec
-008-gaps
-009-media
-010-modes
-011-rofi
-012-scratchpad
-013-ui
-014-window-management
-015-workspaces
-
-
-
-#016-kde-plasma 
+#if plasma
+#kde-plasma 

@@ -1,5 +1,9 @@
 # vim: filetype=sh
 
+###################################
+#              gaps               #
+###################################
+
 # https://github.com/nim-/dotfiles/blob/master/.i3/config (gaps)
 # Airblader/i3
 

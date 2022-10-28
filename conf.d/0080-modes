@@ -1,5 +1,9 @@
 # vim: filetype=sh
 
+###################################
+#              modes              #
+###################################
+
 # https://wiki.archlinux.org/index.php/I3
 set $mode_display Ext Screen (v) VGA ON, (h) HDMI ON, (x) VGA OFF, (y) HDMI OFF
 mode "$mode_display" {

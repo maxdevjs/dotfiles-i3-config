@@ -1,5 +1,9 @@
 # vim: filetype=sh
 
+######################################
+#         window management          #
+######################################
+
 # new window defaults
 new_window pixel 2 
 new_float pixel 2

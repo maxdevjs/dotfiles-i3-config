@@ -1,5 +1,9 @@
 # vim: filetype=sh
 
+######################################
+#            workspaces              #
+######################################
+
 # navigation
 # prev next workspace
 bindsym $mod+comma workspace prev

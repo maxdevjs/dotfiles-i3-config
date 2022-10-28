@@ -1,5 +1,9 @@
 # vim: filetype=sh
 
+###################################
+#               ui                #
+###################################
+
 #set_from_resource        $primary primary #ffb52a
 
 set_from_resource        $foreground foreground #ffb52a
