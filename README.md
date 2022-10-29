@@ -1,6 +1,17 @@
 # dotfiles-i3-config
 Configuration files for [i3](https://i3wm.org/).
 
+## Resources
+
+### Readings
+
+- [ ] [Configuring i3 Window Manager: a Complete Guide](https://thevaluable.dev/i3-config-mouseless/)
+- [ ] [My i3 window manager setup](https://samsaffron.com/archive/2019/04/09/my-i3-window-manager-setup)
+
+#### Inspirations
+
+- [ ] [EllaTheCat/dopamine-2020](https://github.com/EllaTheCat/dopamine-2020)
+
 ## TODO
 
 ### Split configuration

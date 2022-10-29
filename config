@@ -289,30 +289,148 @@ mode "$mode_display" {
 }
 bindsym $mod+x mode "$mode_display"
 
-# resize window (you can also use the mouse for that)
-mode "resize" {
-  # These bindings trigger as soon as you enter the resize mode
+# Resize window (you can also use the mouse for that)
+set $mode_resize_menu Resize [c]lassic [h]orizontal [v]ertical
+mode "$mode_resize_menu" {
+  bindsym c mode $mode_resize
+  bindsym h mode $mode_resize_horizontally
+  bindsym v mode $mode_resize_vertically
 
-  # Pressing left will shrink the window’s width.
-  # Pressing right will grow the window’s width.
-  # Pressing up will shrink the window’s height.
-  # Pressing down will grow the window’s height.
-  bindsym j resize shrink width 10 px or 10 ppt
-  bindsym k resize grow height 10 px or 10 ppt
-  bindsym l resize shrink height 10 px or 10 ppt
-  bindsym semicolon resize grow width 10 px or 10 ppt
+  # Back to normal: Enter or Escape
+  bindsym Escape mode "default"
+  bindsym Return mode "default"
+}
+# Triggers the mode
+bindsym $mod+r mode "$mode_resize_menu"
 
-  # same bindings, but for the arrow keys
+# Resize window (you can also use the mouse for that)
+set $mode_resize Resize (h) shrink width, (j) shrink height, (k) grow height, (l) grow width
+mode "$mode_resize" {
+  # Go left to shrink the window’s width
+  bindsym h resize shrink width 10 px or 10 ppt
   bindsym Left resize shrink width 10 px or 10 ppt
-  bindsym Down resize grow height 10 px or 10 ppt
-  bindsym Up resize shrink height 10 px or 10 ppt
+  # Go up to grow the window’s height.
+  bindsym k resize grow height 10 px or 10 ppt
+  bindsym Up resize grow height 10 px or 10 ppt
+  # Go down to shrink the window’s height.
+  bindsym j resize shrink height 10 px or 10 ppt
+  bindsym Down resize shrink height 10 px or 10 ppt
+  # Go right to grow the window’s width.
+  bindsym l resize grow width 10 px or 10 ppt
   bindsym Right resize grow width 10 px or 10 ppt
 
-  # back to normal: Enter or Escape
+  # Back to normal: Enter or Escape
   bindsym Return mode "default"
   bindsym Escape mode "default"
 }
-bindsym $mod+r mode "resize"
+# Triggers the mode
+#bindsym $mod+r mode "$mode_resize"
+bindsym $mod+F10 mode "$mode_resize"
+
+set $mode_resize_horizontally Resize horizontally [g]row, [s]hrink
+#set $mode_resize_horizontally Resize horizontally (g) grow, (s) shrink
+mode "$mode_resize_horizontally" {
+  bindsym g resize grow width 10 px or 10 ppt
+  bindsym s resize shrink width 10 px or 10 ppt
+
+  # Back to normal: Enter or Escape
+  bindsym Escape mode "default"
+  # Back to Resize Menu
+  bindsym Return mode $mode_resize_menu
+}
+
+set $mode_resize_vertically Resize vertically [g]row, [s]hrink
+mode "$mode_resize_vertically" {
+  bindsym g resize grow height 10 px or 10 ppt
+  bindsym s resize shrink height 10 px or 10 ppt
+
+  # Back to normal: Enter or Escape
+  bindsym Escape mode "default"
+  # Back to Resize Menu
+  bindsym Return mode $mode_resize_menu
+}
+bindsym $mod+F5 mode "$mode_resize_vertically"
+
+#set $mode_menu Focus (f), Move (m), Move to workspace (w), Resize (r), Split (s)
+set $mode_menu [f]ocus, [m]ove, move to [w]orkspace, [r]esize, [s]plit
+mode "$mode_menu" {
+  bindsym f mode "$mode_focus"
+  bindsym m mode "$mode_move"
+  bindsym r mode "$mode_resize_menu"
+  bindsym s mode "$mode_split"
+  bindsym w mode "$mode_move_to_workspace"
+
+  # Back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+} 
+# Triggers the mode
+#bindsym $mod+r mode "$mode_resize"
+bindsym $mod+m mode "$mode_menu"
+
+set $mode_focus Focus (h) left, (j) down, (k) up, (l) right
+mode "$mode_focus" {
+  bindsym h focus left
+  bindsym Left focus left
+  bindsym j focus down
+  bindsym Down focus down
+  bindsym k focus up
+  bindsym Up focus up
+  bindsym l focus right
+  bindsym Right focus right
+
+  # Back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+} 
+# Triggers the mode
+bindsym $mod+F11 mode "$mode_focus"
+
+set $mode_move Move (h) left, (j) down, (k) up, (l) right
+mode "$mode_move" {
+  bindsym h move left
+  bindsym Left move left
+
+  bindsym j move down
+  bindsym Down focus down
+
+  bindsym k move up
+  bindsym Up move up
+
+  bindsym l move right
+  bindsym Right move right
+
+  # Back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+} 
+# Triggers the mode
+bindsym $mod+F12 mode "$mode_move"
+
+# https://www.reddit.com/r/i3wm/comments/aj8ij4/exit_mode_automatically_after_inactivty/
+# https://faq.i3wm.org/question/5049/move-goto-workspace-when-moving-a-container-empties-the-focused-workspace.1.html
+set $mode_move_to_workspace Move to workspace (2), (3), (0)
+mode "$mode_move_to_workspace" {
+  bindsym 2 move container to workspace $ws2; exec i3-msg mode default # convoluted way
+  bindsym 3 move container to workspace $ws3; mode default # straightforward way
+  bindsym 0 move container to workspace $ws10; mode default; workspace $ws10
+  
+  # Back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+# Triggers the mode
+bindsym $mod+F1 mode "$mode_move_to_workspace"
+
+set $mode_split Split (h)orizontal (v)ertical
+mode "$mode_split" {
+    bindsym h split h; mode "default"
+    bindsym v split v; mode "default"
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+# Triggers the mode
+bindsym $mod+F2 mode "$mode_split"
 
 set $mode_system (0) reload i3, (l) lock , (e) logout , (s) suspend  , (h) hibernate  , (r) reboot   , (Shift+s) shutdown 
 mode "$mode_system" {
